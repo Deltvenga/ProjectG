@@ -6,17 +6,22 @@ using System.ServiceModel;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace WcfServiceLibrary1
 {
     // ПРИМЕЧАНИЕ. Команду "Переименовать" в меню "Рефакторинг" можно использовать для одновременного изменения имени класса "Service1" в коде и файле конфигурации.
     public class Service1 : IService1
     {
-        public string connectionString = "Data Source=LAPTOP-20V122MK;Integrated Security = SSPI; Initial Catalog = project";
+        private string getConString()
+        {
+            return File.ReadAllLines("../../conString.txt")[0];
+        }
 
         public List<string> GetMarathon()
         {
-            SqlConnection con = new SqlConnection(connectionString);
+
+            SqlConnection con = new SqlConnection(getConString());
             con.Open();
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
