@@ -10,7 +10,7 @@
   - [Мухамедшина Э.А.](https://github.com/thelyaa/) - BackEnd
   - [Усманов И.?](https://github.com/Usmonovi/) - ?
 
-### Соглашения
+### Соглашения и заметки
 
 1) Для работы с БД необходимо заполнить строку подключения, класть ее по пути ProjectG\WcfServiceLibrary\WcfServiceLibrary1 в файл conString.txt
 2) У каждого экрана свой отдельный модуль, имеющий ViewModel и View непосредственно, лежат они по таким же адресам в проекте
