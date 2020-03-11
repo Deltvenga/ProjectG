@@ -13,6 +13,9 @@ namespace WcfServiceLibrary1
     {
         [OperationContract]
         List<string> GetMarathon();
+
+        [OperationContract]
+        List<List<string>> GetEventType();
         // TODO: Добавьте здесь операции служб
     }
 

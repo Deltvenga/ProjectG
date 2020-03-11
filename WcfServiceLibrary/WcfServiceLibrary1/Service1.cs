@@ -18,9 +18,12 @@ namespace WcfServiceLibrary1
             return File.ReadAllLines("C:/conString.txt")[0];
         }
 
+        /// <summary>
+        /// Метод получения всех турниров
+        /// </summary>
+        /// <returns>Список всех турниров (год + город проведения)</returns>
         public List<string> GetMarathon()
         {
-
             SqlConnection con = new SqlConnection(getConString());
             con.Open();
             SqlCommand cmd = con.CreateCommand();
@@ -41,6 +44,37 @@ namespace WcfServiceLibrary1
             con.Close();
             return list;
 
+        }
+
+        /// <summary>
+        /// Метод получения всех типов заездов в каждом из марафоне
+        /// </summary>
+        /// <returns>Список всех типов заездов в каждом марафоне</returns>
+        public List<List<string>> GetEventType()
+        {
+            //string connectionString = "Data Source=LAPTOP-20V122MK;Integrated Security=SSPI;Initial Catalog=marathondb";
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select EventType.EventTypeName, Marathon.MarathonId From EventType, [Event], Marathon Where [Event].MarathonId = Marathon.MarathonId and EventType.EventTypeId = [Event].EventTypeId;";
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            List<List<string>> list = new List<List<string>>();
+            DataTableReader dtreader = dt.CreateDataReader();
+            while (dtreader.Read())
+            {
+                List<string> rowlist = new List<string>();
+                rowlist.Add(dtreader["EventTypeName"].ToString());
+                rowlist.Add(dtreader["MarathonId"].ToString());
+                list.Add(rowlist);
+            }
+
+            con.Close();
+            return list;
         }
     }
 }
