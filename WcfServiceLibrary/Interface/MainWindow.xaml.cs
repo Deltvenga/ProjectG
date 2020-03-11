@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Interface.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,25 @@ namespace Interface
     {
         public MainWindow()
         {
+            DataContext = new MainScreen();
             InitializeComponent();
+        }
+
+        public void ChangeText()
+        {
+            testBlock.Text = "testtt";
+        }
+
+        public void ChangeTab(string name)
+        {
+            if(name == "PreviousRaceModel")
+            {
+                DataContext = new PreviousRaceModel();
+            }
+            if (name == "MainScreen")
+            {
+                DataContext = new MainScreen();
+            }
         }
     }
 }
