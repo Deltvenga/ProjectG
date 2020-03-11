@@ -15,7 +15,7 @@ namespace WcfServiceLibrary1
     {
         private string getConString()
         {
-            return File.ReadAllLines("../../conString.txt")[0];
+            return File.ReadAllLines("C:/conString.txt")[0];
         }
 
         public List<string> GetMarathon()

@@ -27,14 +27,9 @@ namespace Interface
             InitializeComponent();
         }
 
-        public void ChangeText()
-        {
-            testBlock.Text = "testtt";
-        }
-
         public void ChangeTab(string name)
         {
-            if(name == "PreviousRaceModel")
+            if (name == "PreviousRaceModel")
             {
                 DataContext = new PreviousRaceModel();
             }

@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /conString.txt
+/WcfServiceLibrary/WcfServiceLibrary1/conString.txt
