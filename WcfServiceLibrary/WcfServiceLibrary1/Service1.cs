@@ -4,28 +4,38 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace WcfServiceLibrary1
 {
     // ПРИМЕЧАНИЕ. Команду "Переименовать" в меню "Рефакторинг" можно использовать для одновременного изменения имени класса "Service1" в коде и файле конфигурации.
     public class Service1 : IService1
     {
-        public string GetData(int value)
-        {
-            return string.Format("You entered: {0}", value);
-        }
+        public string connectionString = "Data Source=LAPTOP-20V122MK;Integrated Security = SSPI; Initial Catalog = project";
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        public List<string> GetMarathon()
         {
-            if (composite == null)
+            SqlConnection con = new SqlConnection(connectionString);
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select Marathon.YearHeld, Country.CountryName From Marathon, Country Where Marathon.CountryCode = Country.CountryCode";
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            List<string> list = new List<string>();
+            DataTableReader dtreader = dt.CreateDataReader();
+            while (dtreader.Read())
             {
-                throw new ArgumentNullException("composite");
+                list.Add(dtreader["YearHeld"].ToString() + " - " + dtreader["CountryName"].ToString());
             }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
+
+            con.Close();
+            return list;
+
         }
     }
 }
