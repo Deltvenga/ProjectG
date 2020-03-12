@@ -1,17 +1,7 @@
-﻿using System;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Interface.Views
 {
@@ -23,6 +13,10 @@ namespace Interface.Views
         public PreviousRace()
         {
             InitializeComponent();
+            var serv = new ServiceReference1.Service1Client();
+            MarathonCmBox.ItemsSource = serv.GetMarathon();
+            serv.GetEventType().ToList().ForEach(item => RaceEventCmBox.Items.Add(item[1]));
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
