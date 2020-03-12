@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfServiceLibrary1", "WcfServiceLibrary1\WcfServiceLibrary1.csproj", "{EB93D422-D2C2-406A-8E80-64361C818E71}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface", "Interface\Interface.csproj", "{FD5B2A70-C706-47EC-8B64-423BCCFEC112}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EB93D422-D2C2-406A-8E80-64361C818E71} = {EB93D422-D2C2-406A-8E80-64361C818E71}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
