@@ -22,10 +22,22 @@ namespace Interface.ServiceReference1 {
         System.Threading.Tasks.Task<string[]> GetMarathonAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetEventType", ReplyAction="http://tempuri.org/IService1/GetEventTypeResponse")]
-        string[][] GetEventType();
+        string[][] GetEventType(int idMarathon);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetEventType", ReplyAction="http://tempuri.org/IService1/GetEventTypeResponse")]
-        System.Threading.Tasks.Task<string[][]> GetEventTypeAsync();
+        System.Threading.Tasks.Task<string[][]> GetEventTypeAsync(int idMarathon);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetGender", ReplyAction="http://tempuri.org/IService1/GetGenderResponse")]
+        string[] GetGender();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetGender", ReplyAction="http://tempuri.org/IService1/GetGenderResponse")]
+        System.Threading.Tasks.Task<string[]> GetGenderAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetPreviousResult", ReplyAction="http://tempuri.org/IService1/GetPreviousResultResponse")]
+        string[][] GetPreviousResult(int fromAge, int toAge, int idMarathon, string idEventType, string gender);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetPreviousResult", ReplyAction="http://tempuri.org/IService1/GetPreviousResultResponse")]
+        System.Threading.Tasks.Task<string[][]> GetPreviousResultAsync(int fromAge, int toAge, int idMarathon, string idEventType, string gender);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -63,12 +75,28 @@ namespace Interface.ServiceReference1 {
             return base.Channel.GetMarathonAsync();
         }
         
-        public string[][] GetEventType() {
-            return base.Channel.GetEventType();
+        public string[][] GetEventType(int idMarathon) {
+            return base.Channel.GetEventType(idMarathon);
         }
         
-        public System.Threading.Tasks.Task<string[][]> GetEventTypeAsync() {
-            return base.Channel.GetEventTypeAsync();
+        public System.Threading.Tasks.Task<string[][]> GetEventTypeAsync(int idMarathon) {
+            return base.Channel.GetEventTypeAsync(idMarathon);
+        }
+        
+        public string[] GetGender() {
+            return base.Channel.GetGender();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetGenderAsync() {
+            return base.Channel.GetGenderAsync();
+        }
+        
+        public string[][] GetPreviousResult(int fromAge, int toAge, int idMarathon, string idEventType, string gender) {
+            return base.Channel.GetPreviousResult(fromAge, toAge, idMarathon, idEventType, gender);
+        }
+        
+        public System.Threading.Tasks.Task<string[][]> GetPreviousResultAsync(int fromAge, int toAge, int idMarathon, string idEventType, string gender) {
+            return base.Channel.GetPreviousResultAsync(fromAge, toAge, idMarathon, idEventType, gender);
         }
     }
 }

@@ -15,13 +15,45 @@
   </xs:element>
   <xs:element name="GetEventType">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idMarathon" type="xs:int" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetEventTypeResponse">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetEventTypeResult" nillable="true" type="q2:ArrayOfArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetGender">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetGenderResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetGenderResult" nillable="true" type="q3:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPreviousResult">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fromAge" type="xs:int" />
+        <xs:element minOccurs="0" name="toAge" type="xs:int" />
+        <xs:element minOccurs="0" name="idMarathon" type="xs:int" />
+        <xs:element minOccurs="0" name="idEventType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="gender" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPreviousResultResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetPreviousResultResult" nillable="true" type="q4:ArrayOfArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

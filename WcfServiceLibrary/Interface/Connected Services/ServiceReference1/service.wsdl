@@ -19,6 +19,18 @@
   <wsdl:message name="IService1_GetEventType_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetEventTypeResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetGender_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGender" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetGender_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGenderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPreviousResult_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPreviousResult" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPreviousResult_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPreviousResultResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="GetMarathon">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetMarathon" message="tns:IService1_GetMarathon_InputMessage" />
@@ -27,6 +39,14 @@
     <wsdl:operation name="GetEventType">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetEventType" message="tns:IService1_GetEventType_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetEventTypeResponse" message="tns:IService1_GetEventType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGender">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetGender" message="tns:IService1_GetGender_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetGenderResponse" message="tns:IService1_GetGender_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPreviousResult">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetPreviousResult" message="tns:IService1_GetPreviousResult_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetPreviousResultResponse" message="tns:IService1_GetPreviousResult_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -42,6 +62,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetEventType">
       <soap:operation soapAction="http://tempuri.org/IService1/GetEventType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGender">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetGender" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPreviousResult">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetPreviousResult" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
