@@ -37,6 +37,10 @@ namespace Interface
             {
                 DataContext = new MainScreen();
             }
+            if (name == "RegisterFormModel")
+            {
+                DataContext = new RegisterFormModel();
+            }
         }
     }
 }

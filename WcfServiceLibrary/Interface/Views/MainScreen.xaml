@@ -13,5 +13,7 @@
         <DockPanel HorizontalAlignment="Left" Height="97" LastChildFill="False" VerticalAlignment="Top" Width="518" Background="#FF505050"/>
         <TextBlock HorizontalAlignment="Left" Margin="226,30,0,0" TextWrapping="Wrap" Text="Marathon skills" VerticalAlignment="Top" Foreground="White"/>
         <Button Content="T:go to race history" HorizontalAlignment="Left" Margin="36,232,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click_1"/>
+        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"/>
+        <Button Content="T:Register" HorizontalAlignment="Left" Height="24" Margin="217,228,0,0" VerticalAlignment="Top" Width="61" Click="Button_Click_2"/>
     </Grid>
 </UserControl>
