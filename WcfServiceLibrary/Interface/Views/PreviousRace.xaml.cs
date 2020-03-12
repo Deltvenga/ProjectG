@@ -41,13 +41,9 @@ namespace Interface.Views
 
         private void MarathonCmBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var i = 0;
             serv.GetEventType(MarathonCmBox.SelectedIndex).ToList().ForEach(obj => 
             {
-                var test = obj;
                 RaceEventCmBox.Items.Add(GetNewItem(obj[0],Convert.ToInt32(obj[1])));
-                
-                i++;
             });
         }
     }
