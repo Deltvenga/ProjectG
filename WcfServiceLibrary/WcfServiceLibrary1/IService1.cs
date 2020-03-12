@@ -16,6 +16,12 @@ namespace WcfServiceLibrary1
 
         [OperationContract]
         List<List<string>> GetEventType();
+
+        [OperationContract]
+        List<string> GetGender();
+
+        [OperationContract]
+        List<List<string>> GetAge(int fromAge, int toAge, int idMarathon, string idEventType, string gender);
         // TODO: Добавьте здесь операции служб
     }
 

@@ -76,5 +76,89 @@ namespace WcfServiceLibrary1
             con.Close();
             return list;
         }
+
+        /// <summary>
+        /// Метод получения гендеров из БД
+        /// </summary>
+        /// <returns>список гендеров + any</returns>
+        public List<string> GetGender()
+        {
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select * From Gender";
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            List<string> list = new List<string>();
+            DataTableReader dtreader = dt.CreateDataReader();
+            while (dtreader.Read())
+            {               
+                list.Add(dtreader["Gender"].ToString());
+            }
+
+            list.Add("Any");
+
+            con.Close();
+            return list;
+        }
+
+        public List<List<string>> GetAge(int fromAge, int toAge, int idMarathon, string idEventType, string gender)
+        {
+            var fromDate = getDateFormat(fromAge);
+            var toDate = getDateFormat(toAge);
+
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            //cmd.CommandText = "set language english Select RegistrationEvent.RaceTime, [User].FirstName, [User].LastName, Runner.DateOfBirth, Runner.CountryCode From [User], Runner, RegistrationEvent, Registration Where Runner.RunnerId = Registration.RunnerId and Registration.RegistrationId = RegistrationEvent.RegistrationId and [User].Email = Runner.Email and RaceTime is not null and RaceTime <> 0 and Runner.DateOfBirth between '" + toDate + "' and '" + fromDate + "' order by RaceTime;";
+            if (gender != "Any") cmd.CommandText = "set language english Select RegistrationEvent.RaceTime, [User].FirstName, [User].LastName, Runner.DateOfBirth, Runner.CountryCode From [User], [Event], Runner, RegistrationEvent, Registration Where Runner.RunnerId = Registration.RunnerId and Registration.RegistrationId = RegistrationEvent.RegistrationId and [User].Email = Runner.Email and RaceTime is not null and RaceTime <> 0 and[Event].EventTypeId = '" + idEventType + "' and[Event].MarathonId = '" + idMarathon + "' and Runner.Gender = '" + gender + "' and Runner.DateOfBirth between '" + toDate + "' and '" + fromDate + "' order by RaceTime;";
+            else cmd.CommandText = "set language english Select RegistrationEvent.RaceTime, [User].FirstName, [User].LastName, Runner.DateOfBirth, Runner.CountryCode From [User], [Event], Runner, RegistrationEvent, Registration Where Runner.RunnerId = Registration.RunnerId and Registration.RegistrationId = RegistrationEvent.RegistrationId and [User].Email = Runner.Email and RaceTime is not null and RaceTime <> 0 and[Event].EventTypeId = '" + idEventType + "' and[Event].MarathonId = '" + idMarathon + "' and Runner.DateOfBirth between '" + toDate + "' and '" + fromDate + "' order by RaceTime;";
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            List<List<string>> list = new List<List<string>>();
+            DataTableReader dtreader = dt.CreateDataReader();
+            int index = 0;
+            while (dtreader.Read())
+            {
+                List<string> rowlist = new List<string>();
+                rowlist.Add(index.ToString());
+                rowlist.Add(dtreader["RaceTime"].ToString());
+                rowlist.Add(dtreader["FirstName"].ToString());
+                rowlist.Add(dtreader["LastName"].ToString());
+                rowlist.Add(dtreader["DateOfBirth"].ToString());
+                rowlist.Add(dtreader["CountryCode"].ToString());
+                list.Add(rowlist);
+                index++;
+            }
+
+            con.Close();
+            return list;
+        }
+
+       
+        private string getDateFormat(int age)
+        {
+            var date = getDate(age);
+            var day = date.Day.ToString();
+            var month = date.Month.ToString();
+            var year = date.Year.ToString();
+            return (year + '-' + month + '-' + day).ToString();
+        }
+
+        private DateTime getDate(int age)
+        {
+            var timeNow = DateTime.Now;
+            var ageDiff = timeNow.AddYears(-age);
+
+            return ageDiff;
+        }
     }
 }
