@@ -63,11 +63,15 @@
     </Compile>
     <Compile Include="ViewModels\MainScreen.cs" />
     <Compile Include="ViewModels\PreviousRaceModel.cs" />
+    <Compile Include="ViewModels\RegisterFormModel.cs" />
     <Compile Include="Views\MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PreviousRace.xaml.cs">
       <DependentUpon>PreviousRace.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterForm.xaml.cs">
+      <DependentUpon>RegisterForm.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -86,6 +90,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PreviousRace.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegisterForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
