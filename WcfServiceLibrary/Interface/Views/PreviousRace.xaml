@@ -4,11 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Interface.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="42,33,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="30,78,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+             mc:Ignorable="d" Height="400.977" Width="550.741">
+    <Grid Margin="0,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="205*"/>
+            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition Width="298*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="20,19,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="MarathonCmBox" HorizontalAlignment="Left" Margin="32,44,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+        <ComboBox x:Name="RaceEventCmBox" HorizontalAlignment="Left" Margin="32,73,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+        <ComboBox x:Name="GenderCmBox" HorizontalAlignment="Left" Margin="32,120,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+        <ComboBox x:Name="AgeCmBox" HorizontalAlignment="Left" Margin="14,162,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
 
     </Grid>
 </UserControl>
