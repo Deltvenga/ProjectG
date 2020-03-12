@@ -81,7 +81,7 @@ namespace WcfServiceLibrary1
         /// Метод получения гендеров из БД
         /// </summary>
         /// <returns>список гендеров + any</returns>
-        public List<string> GetGender()
+        public List<string> GetGender(bool hasAny)
         {
             SqlConnection con = new SqlConnection(getConString());
             con.Open();
@@ -96,11 +96,10 @@ namespace WcfServiceLibrary1
             List<string> list = new List<string>();
             DataTableReader dtreader = dt.CreateDataReader();
             while (dtreader.Read())
-            {               
+            {
                 list.Add(dtreader["Gender"].ToString());
             }
-
-            list.Add("Any");
+            if (hasAny) list.Add("Any");
 
             con.Close();
             return list;
@@ -176,6 +175,138 @@ namespace WcfServiceLibrary1
             var ageDiff = timeNow.AddYears(-age);
 
             return ageDiff;
+        }
+
+        /// <summary>
+        /// Метод добавление нового пользователя и бегуна
+        /// </summary>
+        /// <param name="email">email</param>
+        /// <param name="password">пароль</param>
+        /// <param name="firstName">имя</param>
+        /// <param name="lastName">фамилия</param>
+        /// <param name="gender">пол</param>
+        /// <param name="dateOfBirth">дата рождения</param>
+        /// <param name="country">страна</param>
+        public void AddRunner(string email, string password, string firstName, string lastName, string gender, string dateOfBirth, string country)
+        {
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Insert into [User] Values('" + email + "', '" + password + "', '" + firstName + "', '" + lastName + "', 'R');";
+            cmd.ExecuteNonQuery();
+
+            SqlCommand getCountry = con.CreateCommand();
+            getCountry.CommandType = CommandType.Text;
+            getCountry.CommandText = "Select CountryCode From Country Where CountryName = '" + country + "';";
+            string countryCode = getCountry.ExecuteScalar().ToString();
+
+            SqlCommand sqlCommand = con.CreateCommand();
+            sqlCommand.CommandType = CommandType.Text;
+            sqlCommand.CommandText = "Insert into [Runner] Values('" + email + "', '" + gender + "', '" + dateOfBirth + "', '" + countryCode + "');";
+            sqlCommand.ExecuteNonQuery();
+
+            con.Close();
+        }
+
+        /// <summary>
+        /// Метод получения всех стран
+        /// </summary>
+        /// <returns>список всех стран</returns>
+        public List<string> GetCountry()
+        {
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select CountryName From Country;";
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            List<string> list = new List<string>();
+            DataTableReader dtreader = dt.CreateDataReader();
+
+            while (dtreader.Read())
+            {
+                list.Add(dtreader["CountryName"].ToString());
+            }
+
+            con.Close();
+            return list;
+        }
+
+        /// <summary>
+        /// Метод получения всех предыдущих результатов авторизированного бегуна
+        /// </summary>
+        /// <param name="idRunner">идентификатор бегуна в системе</param>
+        /// <returns>список всех предыдущих результатов</returns>
+        public List<List<string>> GetRunnerPreviousResults(int idRunner)
+        {
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select concat(Marathon.YearHeld, ' ', Country.CountryName) as Marathon, EventType.EventTypeName as Event, RegistrationEvent.RaceTime as Time From Country, Marathon, EventType, RegistrationEvent, Runner, Registration Where Runner.RunnerId = Registration.RunnerId and Registration.RegistrationId = RegistrationEvent.RegistrationId and Runner.RunnerId = '" + idRunner + "' and Country.CountryCode = Marathon.CountryCode;";
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            List<List<string>> list = new List<List<string>>();
+            DataTableReader dtreader = dt.CreateDataReader();
+
+            while (dtreader.Read())
+            {
+                var newList = new List<string>();
+                newList.Add(dtreader["Marathon"].ToString());
+                newList.Add(dtreader["Event"].ToString());
+                newList.Add(dtreader["Time"].ToString());
+                list.Add(newList);
+            }
+
+            con.Close();
+            return list;
+        }
+
+        /// <summary>
+        /// Метод получения пола и возрастной категории авторизированного бегуна
+        /// </summary>
+        /// <param name="idRunner">идентификатор бегуна</param>
+        /// <returns>пол и возрастная категория бегуна</returns>
+        public string[] GetRunnerParam(int idRunner)
+        {
+            string[] array = new string[2];
+
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select Gender From Runner Where RunnerId = '" + idRunner + "';";
+            array[0] = cmd.ExecuteScalar().ToString();
+
+            SqlCommand cmdDate = con.CreateCommand();
+            cmdDate.CommandType = CommandType.Text;
+            cmdDate.CommandText = "Select DateOfBirth From Runner Where RunnerId = '" + idRunner + "';";
+
+            var date = cmdDate.ExecuteScalar().ToString();
+            var splitTime = date.Split(' ');
+            var splitDate = splitTime[0].Split('.');
+            
+            var dateFormat = new DateTime(int.Parse(splitDate[2]), int.Parse(splitDate[1]), int.Parse(splitDate[0]));
+
+            var ageInDays = (DateTime.Now - dateFormat).Days;
+            var age = ageInDays / 365;
+
+            if (age < 18) array[1] = "Under 18";
+            if (age >= 18 && age <= 29) array[1] = "18 to 29";
+            if (age >= 30 && age <= 39) array[1] = "30 to 39";
+            if (age >= 40 && age <= 55) array[1] = "40 to 55";
+            if (age >= 56 && age <= 70) array[1] = "56 to 70";
+            if (age > 70) array[1] = "Over 70";
+
+            return array;
         }
     }
 }
