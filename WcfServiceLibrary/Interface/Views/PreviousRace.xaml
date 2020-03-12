@@ -9,6 +9,7 @@
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="42,33,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="30,78,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <ComboBox HorizontalAlignment="Left" Margin="172,78,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </UserControl>
