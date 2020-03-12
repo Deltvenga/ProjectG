@@ -28,6 +28,12 @@ namespace WcfServiceLibrary1
 
         [OperationContract]
         List<string> GetCountry();
+
+        [OperationContract]
+        List<List<string>> GetRunnerPreviousResults(int idRunner);
+
+        [OperationContract]
+        string[] GetRunnerParam(int idRunner);
         // TODO: Добавьте здесь операции служб
     }
 
