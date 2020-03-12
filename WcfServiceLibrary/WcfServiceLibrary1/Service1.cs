@@ -81,7 +81,7 @@ namespace WcfServiceLibrary1
         /// Метод получения гендеров из БД
         /// </summary>
         /// <returns>список гендеров + any</returns>
-        public List<string> GetGender()
+        public List<string> GetGender(bool hasAny)
         {
             SqlConnection con = new SqlConnection(getConString());
             con.Open();
@@ -99,8 +99,7 @@ namespace WcfServiceLibrary1
             {               
                 list.Add(dtreader["Gender"].ToString());
             }
-
-            list.Add("Any");
+            if (hasAny) list.Add("Any");
 
             con.Close();
             return list;
@@ -176,6 +175,66 @@ namespace WcfServiceLibrary1
             var ageDiff = timeNow.AddYears(-age);
 
             return ageDiff;
+        }
+
+        /// <summary>
+        /// Метод добавление нового пользователя и бегуна
+        /// </summary>
+        /// <param name="email">email</param>
+        /// <param name="password">пароль</param>
+        /// <param name="firstName">имя</param>
+        /// <param name="lastName">фамилия</param>
+        /// <param name="gender">пол</param>
+        /// <param name="dateOfBirth">дата рождения</param>
+        /// <param name="country">страна</param>
+        public void AddRunner(string email, string password, string firstName, string lastName, string gender, string dateOfBirth, string country)
+        {
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Insert into [User] Values('" + email + "', '" + password + "', '" + firstName + "', '" + lastName + "', 'R');";
+            cmd.ExecuteNonQuery();
+
+            SqlCommand getCountry = con.CreateCommand();
+            getCountry.CommandType = CommandType.Text;
+            getCountry.CommandText = "Select CountryCode From Country Where CountryName = '" + country + "';";
+            string countryCode = getCountry.ExecuteScalar().ToString();
+
+            SqlCommand sqlCommand = con.CreateCommand();
+            sqlCommand.CommandType = CommandType.Text;
+            sqlCommand.CommandText = "Insert into [Runner] Values('" + email + "', '" + gender + "', '" + dateOfBirth + "', '" + countryCode + "');";
+            sqlCommand.ExecuteNonQuery();
+
+            con.Close();
+        }
+
+        /// <summary>
+        /// Метод получения всех стран
+        /// </summary>
+        /// <returns>список всех стран</returns>
+        public List<string> GetCountry()
+        {
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select CountryName From Country;";
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            List<string> list = new List<string>();
+            DataTableReader dtreader = dt.CreateDataReader();
+        
+            while (dtreader.Read())
+            {
+                list.Add(dtreader["CountryName"].ToString());
+            }
+
+            con.Close();
+            return list;
         }
     }
 }

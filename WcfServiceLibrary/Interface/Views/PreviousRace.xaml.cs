@@ -10,7 +10,7 @@ namespace Interface.Views
     {
         public PreviousRace()
         {
-            var serv = new ServiceReference1();
+            var serv = new ServiceReference1.Service1Client();
             InitializeComponent();
         }
 
