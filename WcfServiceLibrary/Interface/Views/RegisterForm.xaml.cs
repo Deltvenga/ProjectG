@@ -16,30 +16,26 @@ using System.Windows.Shapes;
 namespace Interface.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MainScreen.xaml
+    /// Логика взаимодействия для RegisterForm.xaml
     /// </summary>
-    public partial class MainScreen : UserControl
+    public partial class RegisterForm : UserControl
     {
-        public MainScreen()
+        public RegisterForm()
         {
+
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            MainWindow win = (MainWindow)Window.GetWindow(this);
+            win.ChangeTab("MainScreen");
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             MainWindow win = (MainWindow)Window.GetWindow(this);
-            win.ChangeTab("PreviousRaceModel");
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            MainWindow win = (MainWindow)Window.GetWindow(this);
-            win.ChangeTab("RegisterFormModel");
+            win.ChangeTab("MainScreen");
         }
     }
 }
