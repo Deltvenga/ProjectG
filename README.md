@@ -6,7 +6,7 @@
 
   - [Алексеев Р.Н.](https://github.com/Deltvenga/)
   - [Васьков С.Ю.](https://github.com/Svyatix/) - FrontEnd
-  - [Гилев С.?](https://github.com/gilli-s/) - ?
+  - [Гилев А.В.](https://github.com/gilli-s/) - ?
   - [Мухамедшина Э.А.](https://github.com/thelyaa/) - BackEnd
   - [Усманов И.?](https://github.com/Usmonovi/) - ?
 
