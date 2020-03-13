@@ -31,6 +31,30 @@
   <wsdl:message name="IService1_GetPreviousResult_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPreviousResultResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_AddRunner_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRunner" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddRunner_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRunnerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCountry_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountry" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCountry_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetRunnerPreviousResults_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRunnerPreviousResults" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetRunnerPreviousResults_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRunnerPreviousResultsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetRunnerParam_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRunnerParam" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetRunnerParam_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRunnerParamResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="GetMarathon">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetMarathon" message="tns:IService1_GetMarathon_InputMessage" />
@@ -47,6 +71,22 @@
     <wsdl:operation name="GetPreviousResult">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetPreviousResult" message="tns:IService1_GetPreviousResult_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetPreviousResultResponse" message="tns:IService1_GetPreviousResult_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRunner">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/AddRunner" message="tns:IService1_AddRunner_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/AddRunnerResponse" message="tns:IService1_AddRunner_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountry">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetCountry" message="tns:IService1_GetCountry_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetCountryResponse" message="tns:IService1_GetCountry_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRunnerPreviousResults">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetRunnerPreviousResults" message="tns:IService1_GetRunnerPreviousResults_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetRunnerPreviousResultsResponse" message="tns:IService1_GetRunnerPreviousResults_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRunnerParam">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetRunnerParam" message="tns:IService1_GetRunnerParam_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetRunnerParamResponse" message="tns:IService1_GetRunnerParam_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -80,6 +120,42 @@
     </wsdl:operation>
     <wsdl:operation name="GetPreviousResult">
       <soap:operation soapAction="http://tempuri.org/IService1/GetPreviousResult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRunner">
+      <soap:operation soapAction="http://tempuri.org/IService1/AddRunner" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountry">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetCountry" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRunnerPreviousResults">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetRunnerPreviousResults" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRunnerParam">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetRunnerParam" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
