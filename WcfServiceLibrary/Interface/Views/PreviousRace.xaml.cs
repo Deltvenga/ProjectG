@@ -12,6 +12,8 @@ namespace Interface.Views
     public partial class PreviousRace : UserControl
     {
         private ServiceReference1.Service1Client serv = new ServiceReference1.Service1Client();
+        ComboBoxItem currentMarathonItem;
+        ComboBoxItem currentEventRaceItem;
 
         Dictionary<int, string> Ages = new Dictionary<int, string>(6)
         {
@@ -33,10 +35,10 @@ namespace Interface.Views
         private void FillCmBoxes()
         {
 
-            FillDeffinetlyCmBox(serv.GetMarathon().ToList(),MarathonCmBox);
+            FillDeffinetlyCmBox(serv.GetMarathon().ToList(), MarathonCmBox);
             FillDeffinetlyCmBox(serv.GetGender(true).ToList(), GenderCmBox);
             FillDeffinetlyCmBox(Ages.Values.ToList(), AgeCmBox);
-           
+          
         }
         private void FillDeffinetlyCmBox (List<string> servList, ComboBox comboBox)
         {
@@ -44,11 +46,7 @@ namespace Interface.Views
             foreach (string obj in servList)
             {
                 FillCmBox(comboBox, obj, i);
-                i++;
-                if (i == servList.Count)
-                {
-                    i = 0;
-                }
+                i++;              
             }
         }
 
@@ -62,21 +60,31 @@ namespace Interface.Views
             MainWindow win = (MainWindow)Window.GetWindow(this);
             win.ChangeTab("MainScreen");
         }
-        private ComboBoxItem GetNewItem(string itemName, int i)
+        private ComboBoxItem GetNewItem(string itemName, dynamic i)
         {
             ComboBoxItem item = new ComboBoxItem();
             item.Content = itemName;
             item.Tag = i;
             return item;
         }
+  
 
         private void MarathonCmBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             RaceEventCmBox.Items.Clear();
-            serv.GetEventType(MarathonCmBox.SelectedIndex).ToList().ForEach(obj => 
+            var keks = serv.GetEventType(MarathonCmBox.SelectedIndex);
+            foreach(string[] obj in keks)
             {
-                RaceEventCmBox.Items.Add(GetNewItem(obj[0],Convert.ToInt32(obj[1])));
-            });
+                RaceEventCmBox.Items.Add(GetNewItem(obj[1], obj[0]));
+            }
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            currentMarathonItem = (ComboBoxItem)MarathonCmBox.SelectedItem;
+            currentEventRaceItem = (ComboBoxItem)RaceEventCmBox.SelectedItem;
+            var GridData = serv.GetPreviousResult(18, 30, Convert.ToInt32(currentMarathonItem.Tag), currentEventRaceItem.Tag.ToString(), "Male");
+        }
+
     }
 }

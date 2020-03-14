@@ -57,7 +57,7 @@ namespace WcfServiceLibrary1
             con.Open();
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "Select EventType.EventTypeName, Marathon.MarathonId From EventType, [Event], Marathon Where [Event].MarathonId = Marathon.MarathonId and Marathon.MarathonId = '" + idMarathon + "' and EventType.EventTypeId = [Event].EventTypeId;";
+            cmd.CommandText = "Select EventType.EventTypeId, EventType.EventTypeName, Marathon.MarathonId From EventType, [Event], Marathon Where [Event].MarathonId = Marathon.MarathonId and Marathon.MarathonId = '" + idMarathon + "' and EventType.EventTypeId = [Event].EventTypeId;";
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -68,6 +68,7 @@ namespace WcfServiceLibrary1
             while (dtreader.Read())
             {
                 List<string> rowlist = new List<string>();
+                rowlist.Add(dtreader["EventTypeId"].ToString());
                 rowlist.Add(dtreader["EventTypeName"].ToString());
                 rowlist.Add(dtreader["MarathonId"].ToString());
                 list.Add(rowlist);

@@ -17,6 +17,6 @@
         <ComboBox x:Name="RaceEventCmBox" HorizontalAlignment="Left" Margin="60,110,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
         <ComboBox x:Name="GenderCmBox" HorizontalAlignment="Left" Margin="22,110,0,0" VerticalAlignment="Top" Width="120" Grid.Column="3"/>
         <ComboBox x:Name="AgeCmBox" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" Width="120" Grid.Column="3"/>
-
+        <Button Grid.ColumnSpan="3" Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="180,180,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
     </Grid>
 </UserControl>
