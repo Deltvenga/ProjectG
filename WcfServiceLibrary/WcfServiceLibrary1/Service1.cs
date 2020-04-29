@@ -125,8 +125,8 @@ namespace WcfServiceLibrary1
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
             //cmd.CommandText = "set language english Select RegistrationEvent.RaceTime, [User].FirstName, [User].LastName, Runner.DateOfBirth, Runner.CountryCode From [User], Runner, RegistrationEvent, Registration Where Runner.RunnerId = Registration.RunnerId and Registration.RegistrationId = RegistrationEvent.RegistrationId and [User].Email = Runner.Email and RaceTime is not null and RaceTime <> 0 and Runner.DateOfBirth between '" + toDate + "' and '" + fromDate + "' order by RaceTime;";
-            if (gender != "Any") cmd.CommandText = "set language english Select RegistrationEvent.RaceTime, concat([User].FirstName, ' ', [User].LastName) as RunnerName, Runner.DateOfBirth, Runner.CountryCode From [User], [Event], Runner, RegistrationEvent, Registration Where Runner.RunnerId = Registration.RunnerId and Registration.RegistrationId = RegistrationEvent.RegistrationId and [User].Email = Runner.Email and RaceTime is not null and RaceTime <> 0 and[Event].EventTypeId = '" + idEventType + "' and[Event].MarathonId = '" + idMarathon + "' and Runner.Gender = '" + gender + "' and Runner.DateOfBirth between '" + toDate + "' and '" + fromDate + "' order by RaceTime;";
-            else cmd.CommandText = "set language english Select RegistrationEvent.RaceTime, concat([User].FirstName, ' ', [User].LastName) as RunnerName, Runner.DateOfBirth, Runner.CountryCode From [User], [Event], Runner, RegistrationEvent, Registration Where Runner.RunnerId = Registration.RunnerId and Registration.RegistrationId = RegistrationEvent.RegistrationId and [User].Email = Runner.Email and RaceTime is not null and RaceTime <> 0 and[Event].EventTypeId = '" + idEventType + "' and[Event].MarathonId = '" + idMarathon + "' and Runner.DateOfBirth between '" + toDate + "' and '" + fromDate + "' order by RaceTime;";
+            if (gender != "Any") cmd.CommandText = "set language english Select RegistrationEvent.RaceTime, concat([User].FirstName, ' ', [User].LastName) as RunnerName, Runner.DateOfBirth, Runner.CountryCode From [User], [Event], Runner, RegistrationEvent, Registration Where Runner.RunnerId = Registration.RunnerId and Registration.RegistrationId = RegistrationEvent.RegistrationId and [User].Email = Runner.Email and RaceTime is not null and RaceTime <> 0 and [Event].EventTypeId = '" + idEventType + "' and [Event].MarathonId = '" + idMarathon + "' and Runner.Gender = '" + gender + "' and Runner.DateOfBirth between '" + toDate + "' and '" + fromDate + "' order by RaceTime;";
+            else cmd.CommandText = "set language english Select RegistrationEvent.RaceTime, concat([User].FirstName, ' ', [User].LastName) as RunnerName, Runner.DateOfBirth, Runner.CountryCode From [User], [Event], Runner, RegistrationEvent, Registration Where Runner.RunnerId = Registration.RunnerId and Registration.RegistrationId = RegistrationEvent.RegistrationId and [User].Email = Runner.Email and RaceTime is not null and RaceTime <> 0 and [Event].EventTypeId = '" + idEventType + "' and [Event].MarathonId = '" + idMarathon + "' and Runner.DateOfBirth between '" + toDate + "' and '" + fromDate + "' order by RaceTime;";
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -307,6 +307,42 @@ namespace WcfServiceLibrary1
             if (age >= 56 && age <= 70) array[1] = "56 to 70";
             if (age > 70) array[1] = "Over 70";
 
+            return array;
+        }
+
+        public string GetEventId(int idMarathon, string idEventType)
+        {
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select EventId From Event Where MarathonId = '" + idMarathon + "' and EventTypeId = '" + idEventType + "';";
+
+            return cmd.ExecuteScalar().ToString();
+        }
+
+        public string[] GetTotalPreviousResults(int idMarathon, string idEventType)
+        {
+            string[] array = new string[3];
+
+            string idEvent = GetEventId(idMarathon, idEventType);
+
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select count(RegistrationEventId) as TotalRunners From RegistrationEvent Where RegistrationEvent.EventId = '" + idEvent + "';";
+            array[0] = cmd.ExecuteScalar().ToString();
+
+            SqlCommand finished = con.CreateCommand();
+            finished.CommandType = CommandType.Text;
+            finished.CommandText = "Select count(RegistrationEventId) as TotalRunners From RegistrationEvent Where RegistrationEvent.EventId = '" + idEvent + "' and RaceTime is not null and RaceTime <> 0;";
+            array[1] = finished.ExecuteScalar().ToString();
+
+            SqlCommand avg = con.CreateCommand();
+            avg.CommandType = CommandType.Text;
+            avg.CommandText = "Select avg(RaceTime) From RegistrationEvent;";
+            array[2] = avg.ExecuteScalar().ToString(); 
             return array;
         }
     }

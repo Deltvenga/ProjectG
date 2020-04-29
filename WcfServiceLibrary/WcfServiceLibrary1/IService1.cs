@@ -34,6 +34,9 @@ namespace WcfServiceLibrary1
 
         [OperationContract]
         string[] GetRunnerParam(int idRunner);
+
+        [OperationContract]
+        string[] GetTotalPreviousResults(int idMarathon, string idEventType);
         // TODO: Добавьте здесь операции служб
     }
 
