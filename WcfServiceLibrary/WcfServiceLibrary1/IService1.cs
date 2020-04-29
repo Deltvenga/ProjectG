@@ -37,6 +37,21 @@ namespace WcfServiceLibrary1
 
         [OperationContract]
         string[] GetTotalPreviousResults(int idMarathon, string idEventType);
+
+        [OperationContract]
+        List<List<string>> GetEventTypes();
+
+        [OperationContract]
+        List<List<string>> GetRaceKitOptions();
+
+        [OperationContract]
+        List<string> GetCharity();
+
+        [OperationContract]
+        List<List<string>> GetSponsorships(int idRunner);
+
+        [OperationContract]
+        List<string> GetRunnerCharity(int idRunner);
         // TODO: Добавьте здесь операции служб
     }
 

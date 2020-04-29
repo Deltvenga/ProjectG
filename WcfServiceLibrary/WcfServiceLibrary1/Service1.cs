@@ -310,6 +310,12 @@ namespace WcfServiceLibrary1
             return array;
         }
 
+        /// <summary>
+        /// Метод получения идентификатора забега (например, 11_1FM)
+        /// </summary>
+        /// <param name="idMarathon">айди марафона</param>
+        /// <param name="idEventType">айди типа забега</param>
+        /// <returns>идентификатор забега</returns>
         public string GetEventId(int idMarathon, string idEventType)
         {
             SqlConnection con = new SqlConnection(getConString());
@@ -321,6 +327,12 @@ namespace WcfServiceLibrary1
             return cmd.ExecuteScalar().ToString();
         }
 
+        /// <summary>
+        /// Метод получения тотальных результатов по забегам (для страницы предыдущих результатов)
+        /// </summary>
+        /// <param name="idMarathon">айди марафона</param>
+        /// <param name="idEventType">айди забега</param>
+        /// <returns>массив, в котором [0] => кол-во бегунов, [1] => кол-во финишировавших, [2] => среднее время</returns>
         public string[] GetTotalPreviousResults(int idMarathon, string idEventType)
         {
             string[] array = new string[3];
@@ -344,6 +356,169 @@ namespace WcfServiceLibrary1
             avg.CommandText = "Select avg(RaceTime) From RegistrationEvent;";
             array[2] = avg.ExecuteScalar().ToString(); 
             return array;
+        }
+
+        /// <summary>
+        /// Метод получения забегов марафона 2015 вместе со стоимостью участия
+        /// </summary>
+        /// <returns>список забегов и стоимость участия в них</returns>
+        public List<List<string>> GetEventTypes()
+        {
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select EventType.EventTypeName, [Event].Cost From [Event], EventType Where [Event].EventTypeId = EventType.EventTypeId and MarathonId = 5 order by Cost desc";
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            List<List<string>> list = new List<List<string>>();
+            DataTableReader dtreader = dt.CreateDataReader();
+
+            while (dtreader.Read())
+            {
+                var newList = new List<string>();
+                newList.Add(dtreader["EventTypeName"].ToString());
+                newList.Add(dtreader["Cost"].ToString());
+                list.Add(newList);
+            }
+
+            con.Close();
+            return list;
+        }
+
+        /// <summary>
+        /// Метод получения опций на снаряжение
+        /// </summary>
+        /// <returns>список всех опций на снаряжение</returns>
+        public List<List<string>> GetRaceKitOptions()
+        {
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select * From RaceKitOption";
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            List<List<string>> list = new List<List<string>>();
+            DataTableReader dtreader = dt.CreateDataReader();
+
+            while (dtreader.Read())
+            {
+                var newList = new List<string>();
+                newList.Add(dtreader["RaceKitOptionId"].ToString());
+                newList.Add(dtreader["RaceKitOption"].ToString());
+                newList.Add(dtreader["Cost"].ToString());
+                list.Add(newList);
+            }
+
+            con.Close();
+            return list;
+        }
+
+        /// <summary>
+        /// Метод получения всех видов благотворительности
+        /// </summary>
+        /// <returns>список благотворительностей</returns>
+        public List<string> GetCharity()
+        {
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select CharityName, CharityDescription, CharityLogo From Charity";
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            List<string> list = new List<string>();
+            DataTableReader dtreader = dt.CreateDataReader();
+
+            while (dtreader.Read())
+            {
+                list.Add(dtreader["CharityName"].ToString());
+                list.Add(dtreader["CharityDescription"].ToString());
+                list.Add(dtreader["CharityLogo"].ToString());
+            }
+
+            con.Close();
+            return list;
+        }
+
+        /// <summary>
+        /// Метод получения информации по благотворительности
+        /// </summary>
+        /// <param name="idRunner">идентификатор зарегистрированного в системе бегуна</param>
+        /// <returns>информация по благотворительности (наименование, описание, лого)</returns>
+        public List<string> GetRunnerCharity(int idRunner)
+        {
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select CharityName, CharityDescription, CharityLogo From Charity, Registration Where RunnerId = '" + idRunner + "' and Registration.CharityId = Charity.CharityId;";
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            List<string> list = new List<string>();
+            DataTableReader dtreader = dt.CreateDataReader();
+
+            while (dtreader.Read())
+            {
+                list.Add(dtreader["CharityName"].ToString());
+                list.Add(dtreader["CharityDescription"].ToString());
+                list.Add(dtreader["CharityLogo"].ToString());
+            }
+
+            con.Close();
+            return list;
+        }
+
+        /// <summary>
+        /// Метод получения всех спонсоров и суммой пожертвования
+        /// </summary>
+        /// <param name="idRunner">идентификатор зарегистрированного в системе бегуна</param>
+        /// <returns>список спонсоров конкретного участника и сумма пожертвования</returns>
+        /// Для проверки работы idRunner = 193 (выводит двоих спонсоров, каждый с суммой по 500)
+        public List<List<string>> GetSponsorships(int idRunner)
+        {
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+
+            SqlCommand getRegistrationId = con.CreateCommand();
+            getRegistrationId.CommandType = CommandType.Text;
+            getRegistrationId.CommandText = "Select RegistrationId From Registration Where RunnerId = '" + idRunner + "';";
+            int idRegistration = (int)getRegistrationId.ExecuteScalar();
+
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select SponsorName, Amount From Sponsorship Where Sponsorship.RegistrationId = '" + idRegistration + "';";
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            List<List<string>> list = new List<List<string>>();
+            DataTableReader dtreader = dt.CreateDataReader();
+
+            while (dtreader.Read())
+            {
+                var newList = new List<string>();
+                newList.Add(dtreader["SponsorName"].ToString());
+                newList.Add(dtreader["Amount"].ToString());
+                list.Add(newList);
+            }
+
+            con.Close();
+            return list;
         }
     }
 }
