@@ -64,6 +64,9 @@
     <Compile Include="ViewModels\MainScreen.cs" />
     <Compile Include="ViewModels\PreviousRaceModel.cs" />
     <Compile Include="ViewModels\RegisterFormModel.cs" />
+    <Compile Include="Views\SponsorshipPage.xaml.cs">
+      <DependentUpon>SponsorshipPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
@@ -85,6 +88,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\SponsorshipPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
