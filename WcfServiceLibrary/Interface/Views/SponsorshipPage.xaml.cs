@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Interface.Views
 {
     /// <summary>
-    /// Interaction logic for hernya1.xaml
+    /// Interaction logic for SponsorshipPage.xaml
     /// </summary>
-    public partial class hernya1 : Page
+    public partial class SponsorshipPage : Page
     {
-        public hernya1()
+        public SponsorshipPage()
         {
             InitializeComponent();
         }
