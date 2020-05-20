@@ -64,8 +64,14 @@
     <Compile Include="ViewModels\MainScreen.cs" />
     <Compile Include="ViewModels\PreviousRaceModel.cs" />
     <Compile Include="ViewModels\RegisterFormModel.cs" />
-    <Compile Include="Views\SponsorshipPage.xaml.cs">
-      <DependentUpon>SponsorshipPage.xaml</DependentUpon>
+    <Compile Include="Views\Sponsor a runner.xaml.cs">
+      <DependentUpon>Sponsor a runner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\My sponsorship.xaml.cs">
+      <DependentUpon>My sponsorship.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Register for an event.xaml.cs">
+      <DependentUpon>Register for an event.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
@@ -88,7 +94,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\SponsorshipPage.xaml">
+    <Page Include="Views\Sponsor a runner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\My sponsorship.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Register for an event.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,122 @@
+﻿<Page x:Class="Interface.Views.My sponsorship"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Interface.Views"
+      mc:Ignorable="d"
+      Title="Interface.Views.My sponsorship"
+      FontFamily="Tahoma " Height="509.971" Width="651.535">
+
+
+
+    <Border Padding="15" >
+        <StackPanel Background="White" Margin="-5.2,-5.2,-4.8,16.6" >
+
+            <Grid Background="#FF565656">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="9*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="Back" Background="#FFBDBDBD" />
+                <Button Grid.Column="3" Content="Logout" Background="#FFBDBDBD" />
+                <TextBlock x:Name="Title"  Grid.Column= "1" Foreground="White" OpacityMask="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Text="MARATHON SKILLS 2015" FontSize="36" FontFamily="Microsoft JhengHei" TextDecorations="{x:Null}"  />
+            </Grid>
+
+            <Grid Background="White">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Margin="10 10 10 10" Text="My sponsorship" Foreground="#FFB9B9B9" TextTrimming="WordEllipsis" TextWrapping="WrapWithOverflow" TextAlignment="Center" FontSize="24"  />
+
+            </Grid>
+
+            <Grid Background="White" >
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="This shows all the sponsorship you have received for Marathon Skills 2015" Foreground="#FFB9B9B9" FontSize="18" Margin="10 10 10 10" TextWrapping="WrapWithOverflow" TextTrimming="WordEllipsis" TextAlignment="Center" Grid.ColumnSpan="2"  />
+
+            </Grid>
+            <!-- Menu-->
+            <Grid Background="White" Margin="25 25 25 25">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!-- Menu 1-->
+                <StackPanel Grid.Column="0">
+                    <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" Foreground="#FFBCBCBC" Text="Name of the Charity"/>
+                    <!-- Logo-->
+                    <StackPanel Margin="50">
+                        <Image></Image>
+                    </StackPanel>
+
+                    <Grid Margin="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock TextWrapping="Wrap" Grid.Column="0" FontSize="14" Foreground="#FF494949" Text="This would be the long description of the charity . It could go for a few paragraphs." TextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid Margin="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="18*"/>
+                            <ColumnDefinition Width="7*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock TextWrapping="Wrap" Grid.Column="0" FontSize="14" TextAlignment="Center" Foreground="#FF464646" Text="This is more of the description down here and this is some more of description also." Grid.ColumnSpan="2" Margin="0,0,0.4,0.2"/>
+                    </Grid>
+
+
+
+
+                </StackPanel>
+                <!--Menu 2-->
+                <StackPanel Grid.Column="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Margin="30,0,0,0" Grid.Column="0" FontSize="16" FontWeight="Bold" TextAlignment="Left" Foreground="#FFBCBCBC">Sponsor</TextBlock>
+                        <TextBlock Margin="0,0,30,0" Grid.Column="1" FontSize="16" FontWeight="Bold" TextAlignment="Right" Foreground="#FFBCBCBC">Amount</TextBlock>
+                    </Grid>
+                    <!--DataGrid-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <DataGrid Grid.Column="0" Margin="5,15,5,-207.2"></DataGrid>
+                    </Grid>
+                    <Grid Margin="50,225,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" FontSize="16" FontWeight="Bold" TextAlignment="Center" Foreground="#FFBCBCBC" Text="Total"/>
+                        <TextBlock Grid.Column="1" FontSize="16"></TextBlock>
+                    </Grid>
+
+
+
+
+
+                </StackPanel>
+
+            </Grid>
+
+
+
+
+        </StackPanel>
+    </Border>
+</Page>
