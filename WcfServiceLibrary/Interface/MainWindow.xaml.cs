@@ -41,6 +41,10 @@ namespace Interface
             {
                 DataContext = new RegisterFormModel();
             }
+            if (name == "SponsorARunnerModel")
+            {
+                DataContext = new SponsorARunnerModel();
+            }
         }
     }
 }

@@ -18,6 +18,9 @@
         <DataTemplate x:Name="RegisterForm" DataType="{x:Type viewmodels:RegisterFormModel}">
             <views:RegisterForm DataContext="{Binding}"></views:RegisterForm>
         </DataTemplate>
+        <DataTemplate x:Name="SponsorARunner" DataType="{x:Type viewmodels:SponsorARunnerModel}">
+            <views:SponsorARunner DataContext="{Binding}"></views:SponsorARunner>
+        </DataTemplate>
     </Window.Resources>
     <Grid HorizontalAlignment="Center" Height="318" VerticalAlignment="Center" Width="515">
         <ContentControl HorizontalAlignment="Left" Margin="-4,-52,0,0" VerticalAlignment="Top" Content="{Binding}"/>

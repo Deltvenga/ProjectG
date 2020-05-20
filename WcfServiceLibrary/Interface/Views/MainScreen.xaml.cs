@@ -41,5 +41,11 @@ namespace Interface.Views
             MainWindow win = (MainWindow)Window.GetWindow(this);
             win.ChangeTab("RegisterFormModel");
         }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            MainWindow win = (MainWindow)Window.GetWindow(this);
+            win.ChangeTab("SponsorARunnerModel");
+        }
     }
 }

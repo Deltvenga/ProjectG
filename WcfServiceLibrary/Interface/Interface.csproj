@@ -64,14 +64,16 @@
     <Compile Include="ViewModels\MainScreen.cs" />
     <Compile Include="ViewModels\PreviousRaceModel.cs" />
     <Compile Include="ViewModels\RegisterFormModel.cs" />
-    <Compile Include="Views\Sponsor a runner.xaml.cs">
-      <DependentUpon>Sponsor a runner.xaml</DependentUpon>
+    <Compile Include="ViewModels\SponsorARunnerModel.cs" />
+    <Compile Include="ViewModels\TestModel.cs" />
+    <Compile Include="Views\SponsorARunner.xaml.cs">
+      <DependentUpon>SponsorARunner.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\My sponsorship.xaml.cs">
-      <DependentUpon>My sponsorship.xaml</DependentUpon>
+    <Compile Include="Views\MySponsorship.xaml.cs">
+      <DependentUpon>MySponsorship.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Register for an event.xaml.cs">
-      <DependentUpon>Register for an event.xaml</DependentUpon>
+    <Compile Include="Views\RegisterForAnEvent.xaml.cs">
+      <DependentUpon>RegisterForAnEvent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
@@ -81,6 +83,9 @@
     </Compile>
     <Compile Include="Views\RegisterForm.xaml.cs">
       <DependentUpon>RegisterForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TestPage.xaml.cs">
+      <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -94,15 +99,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Sponsor a runner.xaml">
+    <Page Include="Views\SponsorARunner.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\My sponsorship.xaml">
+    <Page Include="Views\MySponsorship.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Register for an event.xaml">
+    <Page Include="Views\RegisterForAnEvent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -115,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RegisterForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

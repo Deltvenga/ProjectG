@@ -18,9 +18,9 @@ namespace Interface.Views
     /// <summary>
     /// Interaction logic for hernya1.xaml
     /// </summary>
-    public partial class hernya1 : Page
+    public partial class SponsorARunner : UserControl
     {
-        public hernya1()
+        public SponsorARunner()
         {
             InitializeComponent();
         }
