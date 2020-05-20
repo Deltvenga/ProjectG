@@ -6,7 +6,11 @@
              xmlns:local="clr-namespace:Interface.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Loaded="Grid_Loaded">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="414*"/>
+            <RowDefinition Height="37*"/>
+        </Grid.RowDefinitions>
         <DockPanel HorizontalAlignment="Left" Height="97" LastChildFill="False" VerticalAlignment="Top" Width="518" Background="#FF505050"/>
         <TextBlock HorizontalAlignment="Left" Margin="211,50,0,0" TextWrapping="Wrap" Text="Marathon skills" VerticalAlignment="Top" Foreground="White"/>
         <Label Content="Register as Runner" HorizontalAlignment="Left" Margin="198,71,0,0" VerticalAlignment="Top"/>
@@ -21,13 +25,13 @@
         <PasswordBox HorizontalAlignment="Left" Margin="72,161,0,0" VerticalAlignment="Top" Width="99"/>
         <Label Content="Password again:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,182,0,0"/>
         <PasswordBox HorizontalAlignment="Left" Margin="104,190,0,0"  VerticalAlignment="Top" Width="100" />
-        <ComboBox HorizontalAlignment="Left" Height="22" Margin="419,134,0,0" VerticalAlignment="Top" Width="99"/>
+        <ComboBox x:Name="GenderComboBox" HorizontalAlignment="Left" Height="22" Margin="419,134,0,0" VerticalAlignment="Top" Width="99" SelectionChanged="ComboBox_SelectionChanged"/>
         <Label Content="Gender:" HorizontalAlignment="Left" Height="26" Margin="343,133,0,0" VerticalAlignment="Top" Width="59"/>
-        <ComboBox HorizontalAlignment="Left" Height="22" Margin="419,198,0,0" VerticalAlignment="Top" Width="99"/>
+        <ComboBox x:Name="CountryComboBox" HorizontalAlignment="Left" Height="22" Margin="419,198,0,0" VerticalAlignment="Top" Width="99"/>
         <Label Content="Country:" HorizontalAlignment="Left" Height="26" Margin="343,197,0,0" VerticalAlignment="Top" Width="59"/>
         <DatePicker HorizontalAlignment="Left" Height="31" Margin="419,161,0,0" VerticalAlignment="Top" Width="99"/>
         <Label Content="Date of Birth:" HorizontalAlignment="Left" Height="26" Margin="314,164,0,0" VerticalAlignment="Top" Width="88"/>
-        <Button Content="Register" HorizontalAlignment="Left" Margin="104,284,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Register" HorizontalAlignment="Left" Margin="104,284,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="284,284,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click_1"/>
         <Button Content="Back" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
 

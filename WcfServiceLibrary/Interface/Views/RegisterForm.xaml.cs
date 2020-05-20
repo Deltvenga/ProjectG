@@ -20,10 +20,15 @@ namespace Interface.Views
     /// </summary>
     public partial class RegisterForm : UserControl
     {
+
+        private ServiceReference1.Service1Client serv = new ServiceReference1.Service1Client();
+
+
         public RegisterForm()
         {
 
             InitializeComponent();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -36,6 +41,46 @@ namespace Interface.Views
         {
             MainWindow win = (MainWindow)Window.GetWindow(this);
             win.ChangeTab("MainScreen");
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            AddValuesComboBox(serv.GetGender(true).ToList(), GenderComboBox);
+            AddValuesComboBox(serv.GetCountry().ToList(), CountryComboBox);
+    
+        }
+
+        private void AddValuesComboBox(List<string> genderList, ComboBox comboBox)
+        {
+            int i = 0;
+            foreach (string obj in genderList)
+            {
+                FillCmBox(comboBox, obj, i);
+                i++;
+            }
+        }
+
+        private void FillCmBox(ComboBox comboBox, string obj, int i)
+        {
+            comboBox.Items.Add(GetNewItem(obj, i));
+        }
+
+        private ComboBoxItem GetNewItem(string itemName, dynamic i)
+        {
+            ComboBoxItem item = new ComboBoxItem();
+            item.Content = itemName;
+            item.Tag = i;
+            return item;
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
