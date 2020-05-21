@@ -15,5 +15,6 @@
         <Button Content="T:go to race history" HorizontalAlignment="Left" Margin="36,232,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click_1"/>
         <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"/>
         <Button Content="T:Register" HorizontalAlignment="Left" Height="24" Margin="217,228,0,0" VerticalAlignment="Top" Width="61" Click="Button_Click_2"/>
+        <Button Content="T:Sponsor A Runner" HorizontalAlignment="Left" Margin="36,256,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click_3"/>
     </Grid>
 </UserControl>
