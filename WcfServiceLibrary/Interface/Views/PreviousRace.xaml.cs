@@ -30,7 +30,6 @@ namespace Interface.Views
         {
             InitializeComponent();
             FillCmBoxes();
-            
         }
         private void FillCmBoxes()
         {
@@ -40,6 +39,7 @@ namespace Interface.Views
             FillDeffinetlyCmBox(Ages.Values.ToList(), AgeCmBox);
           
         }
+       
         private void FillDeffinetlyCmBox (List<string> servList, ComboBox comboBox)
         {
             int i = 0;
@@ -60,6 +60,7 @@ namespace Interface.Views
             MainWindow win = (MainWindow)Window.GetWindow(this);
             win.ChangeTab("MainScreen");
         }
+
         private ComboBoxItem GetNewItem(string itemName, dynamic i)
         {
             ComboBoxItem item = new ComboBoxItem();
@@ -84,6 +85,14 @@ namespace Interface.Views
             currentMarathonItem = (ComboBoxItem)MarathonCmBox.SelectedItem;
             currentEventRaceItem = (ComboBoxItem)RaceEventCmBox.SelectedItem;
             var GridData = serv.GetPreviousResult(18, 30, Convert.ToInt32(currentMarathonItem.Tag), currentEventRaceItem.Tag.ToString(), "Male");
+            var LabelsCounters = serv.GetTotalPreviousResults(Convert.ToInt32(currentMarathonItem.Tag), currentEventRaceItem.Tag.ToString());
+            TotalRunnersCounter.Content = LabelsCounters[0];
+            FinishedRunnersCounter.Content = LabelsCounters[1];
+            
+            TimeSpan time = TimeSpan.FromSeconds(long.Parse(LabelsCounters[2]));
+            AverageRaceTime.Content = time.Hours + "h " + time.Minutes + "m " + time.Seconds + "s";
+
+
         }
 
     }

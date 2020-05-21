@@ -55,6 +55,54 @@
   <wsdl:message name="IService1_GetRunnerParam_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRunnerParamResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetTotalPreviousResults_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTotalPreviousResults" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetTotalPreviousResults_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTotalPreviousResultsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetEventTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventTypes" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetEventTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetRaceKitOptions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRaceKitOptions" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetRaceKitOptions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRaceKitOptionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCharity_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCharity" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCharity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCharityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetSponsorships_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSponsorships" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetSponsorships_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSponsorshipsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetRunnerCharity_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRunnerCharity" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetRunnerCharity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRunnerCharityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetRunners_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRunners" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetRunners_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRunnersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetMarathonStartDateTime_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMarathonStartDateTime" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetMarathonStartDateTime_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMarathonStartDateTimeResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="GetMarathon">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetMarathon" message="tns:IService1_GetMarathon_InputMessage" />
@@ -87,6 +135,38 @@
     <wsdl:operation name="GetRunnerParam">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetRunnerParam" message="tns:IService1_GetRunnerParam_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetRunnerParamResponse" message="tns:IService1_GetRunnerParam_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalPreviousResults">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetTotalPreviousResults" message="tns:IService1_GetTotalPreviousResults_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetTotalPreviousResultsResponse" message="tns:IService1_GetTotalPreviousResults_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetEventTypes" message="tns:IService1_GetEventTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetEventTypesResponse" message="tns:IService1_GetEventTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRaceKitOptions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetRaceKitOptions" message="tns:IService1_GetRaceKitOptions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetRaceKitOptionsResponse" message="tns:IService1_GetRaceKitOptions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCharity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetCharity" message="tns:IService1_GetCharity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetCharityResponse" message="tns:IService1_GetCharity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSponsorships">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetSponsorships" message="tns:IService1_GetSponsorships_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetSponsorshipsResponse" message="tns:IService1_GetSponsorships_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRunnerCharity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetRunnerCharity" message="tns:IService1_GetRunnerCharity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetRunnerCharityResponse" message="tns:IService1_GetRunnerCharity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRunners">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetRunners" message="tns:IService1_GetRunners_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetRunnersResponse" message="tns:IService1_GetRunners_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMarathonStartDateTime">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetMarathonStartDateTime" message="tns:IService1_GetMarathonStartDateTime_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetMarathonStartDateTimeResponse" message="tns:IService1_GetMarathonStartDateTime_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -156,6 +236,78 @@
     </wsdl:operation>
     <wsdl:operation name="GetRunnerParam">
       <soap:operation soapAction="http://tempuri.org/IService1/GetRunnerParam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalPreviousResults">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetTotalPreviousResults" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventTypes">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetEventTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRaceKitOptions">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetRaceKitOptions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCharity">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetCharity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSponsorships">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetSponsorships" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRunnerCharity">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetRunnerCharity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRunners">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetRunners" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMarathonStartDateTime">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetMarathonStartDateTime" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

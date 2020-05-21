@@ -40,16 +40,16 @@ namespace Interface.ServiceReference1 {
         System.Threading.Tasks.Task<string[][]> GetPreviousResultAsync(int fromAge, int toAge, int idMarathon, string idEventType, string gender);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddRunner", ReplyAction="http://tempuri.org/IService1/AddRunnerResponse")]
-        void AddRunner(string email, string password, string firstName, string lastName, string gender, string dateOfBirth, string country);
+        void AddRunner(string email, string password, string firstName, string lastName, string gender, string dateOfBirth, string countryCode, string role);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddRunner", ReplyAction="http://tempuri.org/IService1/AddRunnerResponse")]
-        System.Threading.Tasks.Task AddRunnerAsync(string email, string password, string firstName, string lastName, string gender, string dateOfBirth, string country);
+        System.Threading.Tasks.Task AddRunnerAsync(string email, string password, string firstName, string lastName, string gender, string dateOfBirth, string countryCode, string role);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCountry", ReplyAction="http://tempuri.org/IService1/GetCountryResponse")]
-        string[] GetCountry();
+        string[][] GetCountry();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCountry", ReplyAction="http://tempuri.org/IService1/GetCountryResponse")]
-        System.Threading.Tasks.Task<string[]> GetCountryAsync();
+        System.Threading.Tasks.Task<string[][]> GetCountryAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetRunnerPreviousResults", ReplyAction="http://tempuri.org/IService1/GetRunnerPreviousResultsResponse")]
         string[][] GetRunnerPreviousResults(int idRunner);
@@ -62,6 +62,54 @@ namespace Interface.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetRunnerParam", ReplyAction="http://tempuri.org/IService1/GetRunnerParamResponse")]
         System.Threading.Tasks.Task<string[]> GetRunnerParamAsync(int idRunner);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetTotalPreviousResults", ReplyAction="http://tempuri.org/IService1/GetTotalPreviousResultsResponse")]
+        string[] GetTotalPreviousResults(int idMarathon, string idEventType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetTotalPreviousResults", ReplyAction="http://tempuri.org/IService1/GetTotalPreviousResultsResponse")]
+        System.Threading.Tasks.Task<string[]> GetTotalPreviousResultsAsync(int idMarathon, string idEventType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetEventTypes", ReplyAction="http://tempuri.org/IService1/GetEventTypesResponse")]
+        string[][] GetEventTypes();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetEventTypes", ReplyAction="http://tempuri.org/IService1/GetEventTypesResponse")]
+        System.Threading.Tasks.Task<string[][]> GetEventTypesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetRaceKitOptions", ReplyAction="http://tempuri.org/IService1/GetRaceKitOptionsResponse")]
+        string[][] GetRaceKitOptions();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetRaceKitOptions", ReplyAction="http://tempuri.org/IService1/GetRaceKitOptionsResponse")]
+        System.Threading.Tasks.Task<string[][]> GetRaceKitOptionsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCharity", ReplyAction="http://tempuri.org/IService1/GetCharityResponse")]
+        string[] GetCharity();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCharity", ReplyAction="http://tempuri.org/IService1/GetCharityResponse")]
+        System.Threading.Tasks.Task<string[]> GetCharityAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetSponsorships", ReplyAction="http://tempuri.org/IService1/GetSponsorshipsResponse")]
+        string[][] GetSponsorships(int idRunner);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetSponsorships", ReplyAction="http://tempuri.org/IService1/GetSponsorshipsResponse")]
+        System.Threading.Tasks.Task<string[][]> GetSponsorshipsAsync(int idRunner);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetRunnerCharity", ReplyAction="http://tempuri.org/IService1/GetRunnerCharityResponse")]
+        string[] GetRunnerCharity(int idRunner);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetRunnerCharity", ReplyAction="http://tempuri.org/IService1/GetRunnerCharityResponse")]
+        System.Threading.Tasks.Task<string[]> GetRunnerCharityAsync(int idRunner);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetRunners", ReplyAction="http://tempuri.org/IService1/GetRunnersResponse")]
+        string[][] GetRunners();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetRunners", ReplyAction="http://tempuri.org/IService1/GetRunnersResponse")]
+        System.Threading.Tasks.Task<string[][]> GetRunnersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetMarathonStartDateTime", ReplyAction="http://tempuri.org/IService1/GetMarathonStartDateTimeResponse")]
+        string GetMarathonStartDateTime();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetMarathonStartDateTime", ReplyAction="http://tempuri.org/IService1/GetMarathonStartDateTimeResponse")]
+        System.Threading.Tasks.Task<string> GetMarathonStartDateTimeAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -123,19 +171,19 @@ namespace Interface.ServiceReference1 {
             return base.Channel.GetPreviousResultAsync(fromAge, toAge, idMarathon, idEventType, gender);
         }
         
-        public void AddRunner(string email, string password, string firstName, string lastName, string gender, string dateOfBirth, string country) {
-            base.Channel.AddRunner(email, password, firstName, lastName, gender, dateOfBirth, country);
+        public void AddRunner(string email, string password, string firstName, string lastName, string gender, string dateOfBirth, string countryCode, string role) {
+            base.Channel.AddRunner(email, password, firstName, lastName, gender, dateOfBirth, countryCode, role);
         }
         
-        public System.Threading.Tasks.Task AddRunnerAsync(string email, string password, string firstName, string lastName, string gender, string dateOfBirth, string country) {
-            return base.Channel.AddRunnerAsync(email, password, firstName, lastName, gender, dateOfBirth, country);
+        public System.Threading.Tasks.Task AddRunnerAsync(string email, string password, string firstName, string lastName, string gender, string dateOfBirth, string countryCode, string role) {
+            return base.Channel.AddRunnerAsync(email, password, firstName, lastName, gender, dateOfBirth, countryCode, role);
         }
         
-        public string[] GetCountry() {
+        public string[][] GetCountry() {
             return base.Channel.GetCountry();
         }
         
-        public System.Threading.Tasks.Task<string[]> GetCountryAsync() {
+        public System.Threading.Tasks.Task<string[][]> GetCountryAsync() {
             return base.Channel.GetCountryAsync();
         }
         
@@ -153,6 +201,70 @@ namespace Interface.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string[]> GetRunnerParamAsync(int idRunner) {
             return base.Channel.GetRunnerParamAsync(idRunner);
+        }
+        
+        public string[] GetTotalPreviousResults(int idMarathon, string idEventType) {
+            return base.Channel.GetTotalPreviousResults(idMarathon, idEventType);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetTotalPreviousResultsAsync(int idMarathon, string idEventType) {
+            return base.Channel.GetTotalPreviousResultsAsync(idMarathon, idEventType);
+        }
+        
+        public string[][] GetEventTypes() {
+            return base.Channel.GetEventTypes();
+        }
+        
+        public System.Threading.Tasks.Task<string[][]> GetEventTypesAsync() {
+            return base.Channel.GetEventTypesAsync();
+        }
+        
+        public string[][] GetRaceKitOptions() {
+            return base.Channel.GetRaceKitOptions();
+        }
+        
+        public System.Threading.Tasks.Task<string[][]> GetRaceKitOptionsAsync() {
+            return base.Channel.GetRaceKitOptionsAsync();
+        }
+        
+        public string[] GetCharity() {
+            return base.Channel.GetCharity();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetCharityAsync() {
+            return base.Channel.GetCharityAsync();
+        }
+        
+        public string[][] GetSponsorships(int idRunner) {
+            return base.Channel.GetSponsorships(idRunner);
+        }
+        
+        public System.Threading.Tasks.Task<string[][]> GetSponsorshipsAsync(int idRunner) {
+            return base.Channel.GetSponsorshipsAsync(idRunner);
+        }
+        
+        public string[] GetRunnerCharity(int idRunner) {
+            return base.Channel.GetRunnerCharity(idRunner);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetRunnerCharityAsync(int idRunner) {
+            return base.Channel.GetRunnerCharityAsync(idRunner);
+        }
+        
+        public string[][] GetRunners() {
+            return base.Channel.GetRunners();
+        }
+        
+        public System.Threading.Tasks.Task<string[][]> GetRunnersAsync() {
+            return base.Channel.GetRunnersAsync();
+        }
+        
+        public string GetMarathonStartDateTime() {
+            return base.Channel.GetMarathonStartDateTime();
+        }
+        
+        public System.Threading.Tasks.Task<string> GetMarathonStartDateTimeAsync() {
+            return base.Channel.GetMarathonStartDateTimeAsync();
         }
     }
 }
