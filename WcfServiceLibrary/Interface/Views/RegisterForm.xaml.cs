@@ -43,11 +43,77 @@ namespace Interface.Views
             win.ChangeTab("MainScreen");
         }
 
+
+        //проверка регистрации по кнопке
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+          //  MessageBox.Show(FirstPasswordBox.Password);
+            if (EmailTextBox.Text != "" && FirstPasswordBox.Password != "" && SecondPasswordBox.Password != "" && FirstNameTextBox.Text != "" && LastNameTextBox.Text != "" && GenderComboBox.Text != "" && DateOfBirthDatePicker.Text != "" && CountryComboBox.Text != "")
+            {
+                //подготовка к проверке
+                bool isFill = true;
+                CheckRegisterForm formCheck = new CheckRegisterForm();
+                FillCheckRegisterFormClass(formCheck);
 
+                //выполняю проверку в классе
+                bool[] checkForm = formCheck.CheckForm();
+                string errorMessage = "Неправильное заполнение:\n ";
+
+                //проверка проверки в классе
+                FillingCheck(ref isFill, checkForm, ref errorMessage);
+
+                //проверка
+                if (isFill)
+                {
+                    MessageBox.Show("Ураааааа");
+                }
+                else MessageBox.Show(errorMessage);
+            }
+            else MessageBox.Show("Проверьте заполнение всех полей");
         }
 
+        private void FillCheckRegisterFormClass(CheckRegisterForm formCheck)
+        {
+            formCheck.email = EmailTextBox.Text.ToString();
+            formCheck.pass = FirstPasswordBox.Password.ToString();
+            formCheck.confpass = SecondPasswordBox.Password.ToString();
+            formCheck.firstname = FirstNameTextBox.Text.ToString();
+            formCheck.lastname = LastNameTextBox.Text.ToString();
+            formCheck.dateOfBirth = Convert.ToDateTime(DateOfBirthDatePicker.SelectedDate.Value.ToShortDateString());
+        }
+
+        private static void FillingCheck(ref bool isFill, bool[] checkForm, ref string errorMessage)
+        {
+            if (!checkForm[0])
+            {
+                errorMessage += "Email\n ";
+                isFill = false;
+            }
+            if (!checkForm[1])
+            {
+                errorMessage += "Пароли не совпадают или длина меньше 6\n";
+                isFill = false;
+            }
+            if (!checkForm[2])
+            {
+                errorMessage += "Имя\n ";
+                isFill = false;
+            }
+            if (!checkForm[3])
+            {
+                errorMessage += "Фамилия\n ";
+                isFill = false;
+            }
+            if (!checkForm[4])
+            {
+                errorMessage += "Дата рождения указана неверно";
+                isFill = false;
+            }
+        }
+
+
+
+        //добавление данных в комбобоксы
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             AddValuesComboBox(serv.GetGender(true).ToList(), GenderComboBox);
