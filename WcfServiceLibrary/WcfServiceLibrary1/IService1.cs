@@ -52,6 +52,12 @@ namespace WcfServiceLibrary1
 
         [OperationContract]
         List<string> GetRunnerCharity(int idRunner);
+
+        [OperationContract]
+        List<List<string>> GetRunners();
+
+        [OperationContract]
+        string GetMarathonStartDateTime();
         // TODO: Добавьте здесь операции служб
     }
 

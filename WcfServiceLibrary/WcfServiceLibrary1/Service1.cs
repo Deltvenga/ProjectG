@@ -480,7 +480,7 @@ namespace WcfServiceLibrary1
             con.Open();
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "Select CharityName, CharityDescription, CharityLogo From Charity, Registration Where RunnerId = '" + idRunner + "' and Registration.CharityId = Charity.CharityId;";
+            cmd.CommandText = "Select CharityName, CharityDescription, CharityLogo From Charity, Registration Where RunnerId = '" + idRunner + "' and Registration.CharityId = Charity.CharityId and RegistrationDateTime >= '2015-01-01';";
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -537,6 +537,56 @@ namespace WcfServiceLibrary1
 
             con.Close();
             return list;
+        }
+
+        /// <summary>
+        /// Метод, получающий список имен бегунов из предстоящего марафона (2015), регистрационный код и код страны
+        /// </summary>
+        /// <returns>список бегунов</returns>
+        public List<List<string>> GetRunners()
+        {
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+
+            SqlCommand getRunners = con.CreateCommand();
+            getRunners.CommandType = CommandType.Text;
+            getRunners.CommandText = "Select Registration.RunnerId, LastName, FirstName, RegistrationId, CountryCode From[User], Runner, Registration Where Registration.RunnerId = Runner.RunnerId and Runner.Email = [User].Email and RegistrationDateTime >= '2015-01-01';";
+
+            SqlDataAdapter da = new SqlDataAdapter(getRunners);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            List<List<string>> list = new List<List<string>>();
+            DataTableReader dtreader = dt.CreateDataReader();
+
+            while (dtreader.Read())
+            {
+                var newList = new List<string>();
+                newList.Add(dtreader["Registration.RunnerId"].ToString());
+                newList.Add(dtreader["LastName"].ToString());
+                newList.Add(dtreader["FirstName"].ToString());
+                newList.Add(dtreader["RegistrationId"].ToString());
+                newList.Add(dtreader["CountryCode"].ToString());
+                list.Add(newList);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Метод получения даты начала первого забега марафона 2015
+        /// </summary>
+        /// <returns></returns>
+        public string GetMarathonStartDateTime()
+        {
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select Min(StartDateTime) From Event Where MarathonId = 5";
+
+            return cmd.ExecuteScalar().ToString();
         }
     }
 }
