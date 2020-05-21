@@ -24,10 +24,10 @@ namespace WcfServiceLibrary1
         List<List<string>> GetPreviousResult(int fromAge, int toAge, int idMarathon, string idEventType, string gender);
 
         [OperationContract]
-        void AddRunner(string email, string password, string firstName, string lastName, string gender, string dateOfBirth, string country);
+        void AddRunner(string email, string password, string firstName, string lastName, string gender, string dateOfBirth, string countryCode, string role);
 
         [OperationContract]
-        List<string> GetCountry();
+        List<List<string>> GetCountry();
 
         [OperationContract]
         List<List<string>> GetRunnerPreviousResults(int idRunner);

@@ -179,6 +179,21 @@ namespace WcfServiceLibrary1
         }
 
         /// <summary>
+        /// Метод, возвращающий идентификатор роли
+        /// </summary>
+        /// <param name="role">наименование роли</param>
+        /// <returns>идентификатор роли</returns>
+        public string GetRoleId(string role)
+        {
+            SqlConnection con = new SqlConnection(getConString());
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select RoleId From Role Where RoleName = '" + role + "';";
+            return cmd.ExecuteScalar().ToString();
+        }
+
+        /// <summary>
         /// Метод добавление нового пользователя и бегуна
         /// </summary>
         /// <param name="email">email</param>
@@ -188,24 +203,24 @@ namespace WcfServiceLibrary1
         /// <param name="gender">пол</param>
         /// <param name="dateOfBirth">дата рождения</param>
         /// <param name="country">страна</param>
-        public void AddRunner(string email, string password, string firstName, string lastName, string gender, string dateOfBirth, string country)
+        public void AddRunner(string email, string password, string firstName, string lastName, string gender, string dateOfBirth, string countryCode, string role)
         {
+            string idRole = GetRoleId(role);
+
             SqlConnection con = new SqlConnection(getConString());
             con.Open();
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "Insert into [User] Values('" + email + "', '" + password + "', '" + firstName + "', '" + lastName + "', 'R');";
+            cmd.CommandText = "Insert into [User] Values('" + email + "', '" + password + "', '" + firstName + "', '" + lastName + "', '" + idRole + "');";
             cmd.ExecuteNonQuery();
-
-            SqlCommand getCountry = con.CreateCommand();
-            getCountry.CommandType = CommandType.Text;
-            getCountry.CommandText = "Select CountryCode From Country Where CountryName = '" + country + "';";
-            string countryCode = getCountry.ExecuteScalar().ToString();
 
             SqlCommand sqlCommand = con.CreateCommand();
             sqlCommand.CommandType = CommandType.Text;
-            sqlCommand.CommandText = "Insert into [Runner] Values('" + email + "', '" + gender + "', '" + dateOfBirth + "', '" + countryCode + "');";
-            sqlCommand.ExecuteNonQuery();
+            if (role == "Runner")
+            {
+                sqlCommand.CommandText = "Insert into [Runner] Values('" + email + "', '" + gender + "', '" + dateOfBirth + "', '" + countryCode + "');";
+                sqlCommand.ExecuteNonQuery();
+            }            
 
             con.Close();
         }
@@ -214,24 +229,27 @@ namespace WcfServiceLibrary1
         /// Метод получения всех стран
         /// </summary>
         /// <returns>список всех стран</returns>
-        public List<string> GetCountry()
+        public List<List<string>> GetCountry()
         {
             SqlConnection con = new SqlConnection(getConString());
             con.Open();
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "Select CountryName From Country;";
+            cmd.CommandText = "Select CountryCode, CountryName From Country;";
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
 
-            List<string> list = new List<string>();
+            List<List<string>> list = new List<List<string>>();
             DataTableReader dtreader = dt.CreateDataReader();
 
             while (dtreader.Read())
             {
-                list.Add(dtreader["CountryName"].ToString());
+                var rowList = new List<string>();
+                rowList.Add(dtreader["CountryCode"].ToString());
+                rowList.Add(dtreader["CountryName"].ToString());
+                list.Add(rowList);
             }
 
             con.Close();
